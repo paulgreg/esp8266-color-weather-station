@@ -1,3 +1,13 @@
+#include <Adafruit_GFX.h>       // include Adafruit graphics library
+#include <Adafruit_ILI9341.h>   // include Adafruit ILI9341 TFT library
+ 
+#define TFT_CS    D2            // TFT CS  pin is connected to NodeMCU pin D2
+#define TFT_RST   D3            // TFT RST pin is connected to NodeMCU pin D3
+#define TFT_DC    D4            // TFT DC  pin is connected to NodeMCU pin D4
+Adafruit_ILI9341  tft = Adafruit_ILI9341(TFT_CS, TFT_DC, TFT_RST);
+
+#define BACKGND 0x7618 // https://ee-programming-notepad.blogspot.com/2016/10/16-bit-color-generator-picker.html
+
 #include "icons/01d.h"
 #include "icons/01n.h"
 #include "icons/02d.h"
@@ -71,100 +81,68 @@ void drawText(int x, int y, int color, char* text) {
 }
 
 void printMsg(char* text) {
+  fillScreen(ILI9341_LIGHTGREY);
+  drawBigText(10, 50, ILI9341_BLUE, text);
+}
+
+void printError(char* text) {
   fillScreen(ILI9341_WHITE);
-  drawText(0, 0, ILI9341_BLACK, text);
+  drawBigText(10, 50, ILI9341_RED, text);
 }
 
 void drawIcon(int x, int y, char* icon) {
-  fillScreen(ILI9341_ORANGE);
-  tft.drawRGBBitmap(  0,   0, icon_01d, 100, 100);
-  tft.drawRGBBitmap(100,   0, icon_01n, 100, 100);
-  tft.drawRGBBitmap(200,   0, icon_02d, 100, 100);
-  tft.drawRGBBitmap(  0, 100, icon_02n, 100, 100);
-  tft.drawRGBBitmap(100, 100, icon_03d, 100, 100);
-//  tft.drawRGBBitmap(200, 100, icon_04d, 100, 100);
-/*
-icon_03d
-icon_04d
-icon_09d
-icon_10d
-icon_10n
-icon_11d
-icon_13d
-icon_50d
-  
-/*  if (strcmp(icon, "01d") == 0) {
+  if (strcmp(icon, "01d") == 0) {
     // 01d - Sun
-    tft.drawRGBBitmap(x, y, icon_01d_sun_bits, icon_01d_sun_width, icon_01d_sun_height); //, ILI9341_RED);
+    tft.drawRGBBitmap(x, y, icon_01d, 100, 100);
   } else if (strcmp(icon, "01n") == 0) {
-    // 01d - Sun - night
-    tft.drawRGBBitmap(x, y, icon_01d_sun_bits, icon_01d_sun_width, icon_01d_sun_height); //, ILI9341_BLACK);
+    // 01n - Sun - night
+    tft.drawRGBBitmap(x, y, icon_01n, 100, 100);
   } else if (strcmp(icon, "02d") == 0) {
     // 02d - Cloud, sun
-    tft.drawRGBBitmap(x, y, icon_02d_sun_bits, icon_02d_sun_width, icon_02d_sun_height); //, ILI9341_RED);
-    tft.drawRGBBitmap(x, y, icon_02d_cloud_bits, icon_02d_cloud_width, icon_02d_cloud_height); //, ILI9341_BLACK);
+    tft.drawRGBBitmap(x, y, icon_02d, 100, 100);
   } else if (strcmp(icon, "02n") == 0) {
     // 02d - Cloud, sun - night
-    tft.drawRGBBitmap(x, y, icon_02d_sun_bits, icon_02d_sun_width, icon_02d_sun_height); //, ILI9341_BLACK);
-    tft.drawRGBBitmap(x, y, icon_02d_cloud_bits, icon_02d_cloud_width, icon_02d_cloud_height); //, ILI9341_BLACK);
+    tft.drawRGBBitmap(x, y, icon_02n, 100, 100);
   } else if (strcmp(icon, "03d") == 0 || strcmp(icon, "03n") == 0) {
     // 03d - Cloud
-    tft.drawRGBBitmap(x, y, icon_03d_cloud_bits, icon_03d_cloud_width, icon_03d_cloud_height); //, ILI9341_BLACK);
-  } else if (strcmp(icon, "04d") == 0) {
+    tft.drawRGBBitmap(x, y, icon_03d, 100, 100);
+  } else if (strcmp(icon, "04d") == 0 || strcmp(icon, "04n") == 0) {
     // 04d - Cloud, second cloud
-    tft.drawRGBBitmap(x, y, icon_04d_cloud_bits, icon_04d_cloud_width, icon_04d_cloud_height); //, ILI9341_BLACK);
-    tft.drawRGBBitmap(x, y, icon_04d_cloud_back_bits, icon_04d_cloud_back_width, icon_04d_cloud_back_height); //, ILI9341_RED);
-  } else if (strcmp(icon, "04n") == 0) {
-    // 04d - Cloud, second cloud - night
-    tft.drawRGBBitmap(x, y, icon_04d_cloud_bits, icon_04d_cloud_width, icon_04d_cloud_height); //, ILI9341_BLACK);
-    tft.drawRGBBitmap(x, y, icon_04d_cloud_back_bits, icon_04d_cloud_back_width, icon_04d_cloud_back_height); //, ILI9341_BLACK);
-  } else if (strcmp(icon, "09d") == 0) {
+    tft.drawRGBBitmap(x, y, icon_04d, 100, 100);
+  } else if (strcmp(icon, "09d") == 0 || strcmp(icon, "09n") == 0) {
     // 09d - Clouds, rain
-    tft.drawRGBBitmap(x, y, icon_09d_cloud_bits, icon_09d_cloud_width, icon_09d_cloud_height); //, ILI9341_BLACK);
-    tft.drawRGBBitmap(x, y, icon_09d_rain_bits, icon_09d_rain_width, icon_09d_rain_height); //, ILI9341_RED);
-  } else if (strcmp(icon, "09n") == 0) {
-    // 09d - Clouds, rain - night
-    tft.drawRGBBitmap(x, y, icon_09d_cloud_bits, icon_09d_cloud_width, icon_09d_cloud_height); //, ILI9341_BLACK);
-    tft.drawRGBBitmap(x, y, icon_09d_rain_bits, icon_09d_rain_width, icon_09d_rain_height); //, ILI9341_BLACK);
+    tft.drawRGBBitmap(x, y, icon_09d, 100, 100);
   } else if (strcmp(icon, "10d") == 0) {
     // 10d - Clouds, sun, rain
-    tft.drawRGBBitmap(x, y, icon_10d_cloud_bits, icon_10d_cloud_width, icon_10d_cloud_height); //, ILI9341_BLACK);
-    tft.drawRGBBitmap(x, y, icon_10d_sun_bits, icon_10d_sun_width, icon_10d_sun_height); //, ILI9341_RED);
+    tft.drawRGBBitmap(x, y, icon_10d, 100, 100);
   } else if (strcmp(icon, "10n") == 0) {
     // 10d - Clouds, sun, rain - night
-    tft.drawRGBBitmap(x, y, icon_10d_cloud_bits, icon_10d_cloud_width, icon_10d_cloud_height); //, ILI9341_BLACK);
-    tft.drawRGBBitmap(x, y, icon_10d_sun_bits, icon_10d_sun_width, icon_10d_sun_height); //, ILI9341_BLACK);
-  } else if (strcmp(icon, "11d") == 0) {
+    tft.drawRGBBitmap(x, y, icon_10n, 100, 100);
+  } else if (strcmp(icon, "11d") == 0 || strcmp(icon, "11n") == 0) {
     // 11d - Clouds, lightning
-    tft.drawRGBBitmap(x, y, icon_11d_cloud_bits, icon_11d_cloud_width, icon_11d_cloud_height); //, ILI9341_BLACK);
-    tft.drawRGBBitmap(x, y, icon_11d_ligthning_bits, icon_11d_ligthning_width, icon_11d_ligthning_height); //, ILI9341_RED);
-  } else if (strcmp(icon, "11n") == 0) {
-    // 11d - Clouds, lightning - night
-    tft.drawRGBBitmap(x, y, icon_11d_cloud_bits, icon_11d_cloud_width, icon_11d_cloud_height); //, ILI9341_BLACK);
-    tft.drawRGBBitmap(x, y, icon_11d_ligthning_bits, icon_11d_ligthning_width, icon_11d_ligthning_height); //, ILI9341_BLACK);
+    tft.drawRGBBitmap(x, y, icon_11d, 100, 100);
   } else if (strcmp(icon, "13d") == 0 || strcmp(icon, "13n") == 0) {
     // 13d - Snow
-    tft.drawRGBBitmap(x, y, icon_13d_snow_bits, icon_13d_snow_width, icon_13d_snow_height); //, ILI9341_BLACK);
+    tft.drawRGBBitmap(x, y, icon_13d, 100, 100);
   } else if (strcmp(icon, "50d") == 0 ||strcmp(icon, "50n") == 0) {
     // 50d - Fog
-    tft.drawRGBBitmap(x, y, icon_50d_fog_bits, icon_50d_fog_width, icon_50d_fog_height); //, ILI9341_BLACK);
+    tft.drawRGBBitmap(x, y, icon_50d, 100, 100);
   }
-  */
 }
-/*
+
 void displayDayMinMax(int x, char* title, char* icon, char* temp1, char* temp2, char* humidity) {
-  int offsetTitle = strlen(title) == 1 ? 32 : 10;
-  drawBigText(x + offsetTitle, 28, title);
-  drawIcon(x, 28, icon);
-  drawText(x + 10, 114, temp1, ILI9341_BLACK);
-  drawText(x + 10, 136, temp2, ILI9341_RED);
-  drawSmallText(x + 16, 155, humidity);
-}*/
+  int yOffset = 50;
+  drawBigText(       x,  30 + yOffset, ILI9341_BLACK, title);
+  drawIcon(     x + 60,   0 + yOffset, icon);
+  drawText(     x + 0,  120 + yOffset, ILI9341_BLACK, temp1);
+  drawText(     x + 60, 120 + yOffset, ILI9341_RED, temp2);
+  drawSmallText(x + 10,  60 + yOffset, ILI9341_BLACK, humidity);
+}
 
 void displayWeather(Weather* weather) {
-  fillScreen(ILI9341_WHITE);
-  //drawText(10, 20, ILI9341_BLACK, weather->timezone);
-  drawIcon(10, 40, weather->iconD);
-  //drawSmallText(10, 190, ILI9341_BLACK, weather->updated);
-//displayDayMinMax(95, "J", weather->iconD, weather->tempMinD, weather->tempMaxD, weather->humidityD);
+  fillScreen(BACKGND);
+  drawText(20, 30, ILI9341_BLACK, weather->timezone);
+  displayDayMinMax(10, "J", weather->iconD, weather->tempMinD, weather->tempMaxD, weather->humidityD);
+  displayDayMinMax(150, "J+1", weather->iconD1, weather->tempMinD1, weather->tempMaxD1, weather->humidityD1);
+  drawSmallText(50, 220, ILI9341_BLACK, weather->updated);
 }
