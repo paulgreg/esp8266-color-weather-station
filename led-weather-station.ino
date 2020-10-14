@@ -20,12 +20,13 @@ void setup() {
   Serial.begin(115200);
   Serial.println("\n\nLed Screen Weather Station"); 
   setupScreen();
-  printMsg("Weather Station"); 
-  delay(1000);
+  //printMsg("Weather Station"); 
+  //delay(1000);
 }
 
 void loop(void) {
-  printMsg("try to connect to wifi");
+/*
+  printMsg("Connecting to wifi");
   if (!connectToWifi()) {
     printMsg("Can't connect to wifi");
   } else {    
@@ -35,9 +36,11 @@ void loop(void) {
     } else {
       Weather weather;
       fillWeatherFromJson(&weather);
-      //displayWeather(&weather);
-      printMsg("Weather ok");
+      displayWeather(&weather);
     }
   }
+*/
+Weather weather;
+displayWeather(&weather);
   delay(5 * 60 * 1000);
 }

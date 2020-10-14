@@ -20,10 +20,6 @@ struct Weather {
 
 void fillWeatherFromJson(Weather* weather) {
   sprintf(weather->timezone, "%s", (const char*) json["timezone"]);
-  sprintf(weather->iconH1, "%s", (const char*) json["hourly"][1]["weather"][0]["icon"]);
-  sprintf(weather->tempH1, "%i C", (int) round(json["hourly"][1]["temp"]));
-  sprintf(weather->feelsLikeH1, "%i C", (int) round(json["hourly"][1]["feels_like"]));
-  sprintf(weather->humidityH1, "%i %%", (int) json["hourly"][1]["humidity"]);
 
   sprintf(weather->iconD, "%s", (const char*) json["daily"][0]["weather"][0]["icon"]);
   sprintf(weather->tempMinD, "%i C", (int) round(json["daily"][0]["temp"]["min"]));
