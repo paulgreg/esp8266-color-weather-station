@@ -21,10 +21,10 @@ uint16_t idx = 0;
 void loop(void) {
   uint16_t i = idx % NB_LOCATIONS;
   Serial.printf("\nLocation: %s - count: %i\n", locations[i].town, locations[i].count);
-  if ((locations[i].count % 50) == 0) {
-    printMsg("Connecting to wifi");
+  if ((locations[i].count % 25) == 0) {
+    printMsg("Connecting to wifi...");
     if (!connectToWifi()) {
-      printError("Can't connect to wifi");
+      printError("Can't connect to wifi !");
     } else {
       boolean jsonParsed = getJSON(locations[i].url);
       if (!jsonParsed) {
@@ -37,5 +37,5 @@ void loop(void) {
   displayWeather(locations[i].town, &locations[i].weather);
   locations[i].count++;
   idx++;
-  delay(30 * 1000);
+  delay(15 * 1000);
 }
