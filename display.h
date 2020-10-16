@@ -131,18 +131,18 @@ void drawIcon(int x, int y, char* icon) {
 }
 
 void displayDayMinMax(int x, char* title, char* icon, char* temp1, char* temp2, char* humidity) {
-  int yOffset = 50;
-  drawIcon(     x + 20,  10 + yOffset, icon);
-  drawBigText(  x + 40,  25 + yOffset, ILI9341_BLACK, title);
-  drawText(     x + 75, 120 + yOffset, ILI9341_BLACK, temp1);
-  drawText(     x + 75, 145 + yOffset, ILI9341_RED, temp2);
-  drawSmallText(x + 10, 120 + yOffset, ILI9341_BLACK, humidity);
+  drawIcon(     x +  0,  50, icon);
+  drawBigText(  x + 20,  65, ILI9341_BLACK, title);
+  drawText(     x + 30, 155, ILI9341_BLACK, temp1);
+  drawText(     x + 30, 180, ILI9341_RED, temp2);
+  drawSmallText(x + 35, 200, ILI9341_BLACK, humidity);
 }
 
 void displayWeather(char* town, Weather* weather) {
   fillScreen(BACKGND);
-  drawText(20, 30, ILI9341_BLACK, town);
-  displayDayMinMax(5, " J", weather->iconD, weather->tempMinD, weather->tempMaxD, weather->humidityD);
-  displayDayMinMax(165, "J+1", weather->iconD1, weather->tempMinD1, weather->tempMaxD1, weather->humidityD1);
-  drawSmallText(60, 225, ILI9341_BLACK, weather->updated);
+  drawBigText(20, 30, ILI9341_BLACK, town);
+  displayDayMinMax(0, " H", weather->iconH, weather->tempH, weather->feelsLikeH, weather->humidityH);
+  displayDayMinMax(100, " J", weather->iconD, weather->tempMinD, weather->tempMaxD, weather->humidityD);
+  displayDayMinMax(200, "J+1", weather->iconD1, weather->tempMinD1, weather->tempMaxD1, weather->humidityD1);
+  drawSmallText(60, 230, ILI9341_BLACK, weather->updated);
 }
