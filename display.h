@@ -28,7 +28,7 @@ Adafruit_ILI9341  tft = Adafruit_ILI9341(TFT_CS, TFT_DC, TFT_RST);
 #define SCREEN_HORIZONTAL 1
 #define SCREEN_HORIZONTAL_INVERSE 3
 
-#define SCREEN_ORIENTATION SCREEN_HORIZONTAL_INVERSE
+#define SCREEN_ORIENTATION SCREEN_HORIZONTAL
 
 // https://github.com/adafruit/Adafruit_ILI9341/blob/master/Adafruit_ILI9341.h
 // https://github.com/adafruit/Adafruit-GFX-Library/blob/master/Adafruit_GFX.cpp
