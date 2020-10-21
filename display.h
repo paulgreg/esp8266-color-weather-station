@@ -1,9 +1,9 @@
 #include <Adafruit_GFX.h>       // include Adafruit graphics library
 #include <Adafruit_ILI9341.h>   // include Adafruit ILI9341 TFT library
  
-#define TFT_CS    D2            // TFT CS  pin is connected to NodeMCU pin D2
-#define TFT_RST   D3            // TFT RST pin is connected to NodeMCU pin D3
-#define TFT_DC    D4            // TFT DC  pin is connected to NodeMCU pin D4
+#define TFT_CS    4 // D2            // TFT CS  pin is connected to NodeMCU pin D2 / GPIO 4
+#define TFT_RST   0 // D3            // TFT RST pin is connected to NodeMCU pin D3 / GPIO 0
+#define TFT_DC    2 // D4            // TFT DC  pin is connected to NodeMCU pin D4 / GPIO 2
 Adafruit_ILI9341  tft = Adafruit_ILI9341(TFT_CS, TFT_DC, TFT_RST);
 
 #define BACKGND 0x7618 // https://ee-programming-notepad.blogspot.com/2016/10/16-bit-color-generator-picker.html
