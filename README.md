@@ -7,18 +7,25 @@ That project is another version of my [esp32 weather station](https://github.com
   - esp8266
   - ILI9341 TFT screen compatible 3.3V
 
-The ILI9341 TFT display is connected to the NodeMCU board as follows:
+The ILI9341 TFT display is connected to the esp8266 board as follows:
  - CS pin is connected to D2 (GPIO4),
  - RST pin is connected to D3 (GPIO0),
  - D/C pin is connected to D4 (GPIO2),
  - MOSI pin is connected to D7 (GPIO13),
  - SCK pin is connected to D5 (GPIO14),
  - VCC and BL are connected to pin 3V3,
- - GND is connected to pin GND of the NodeMCU board.
+ - GND is connected to pin GND of the esp8266
+
+Connections to flash esp8266 (if not using NodeMCU)
+
+- VCC to 3.3
+- Ground to ground
+- RX from FTDI to TX on ESP
+- TX from FTDI to RX on ESP
+- DTR from FTDI to GPIO 0 on ESP
+- RST from FTDI to RESET on ESP
 
 ## Arduino env
-
-use Board "NodeMCU 1.0 (ESP12E)" to build with Arduino IDE.
 
 Copy `parameters.h.dist` to `parameters.h` and update it with your wifi settings and update the locations array (you need to change lat/lng and set your OpenWeatherMap API token).
 
