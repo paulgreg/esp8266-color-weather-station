@@ -30,6 +30,8 @@ Adafruit_ILI9341  tft = Adafruit_ILI9341(TFT_CS, TFT_DC, TFT_RST);
 
 #define SCREEN_ORIENTATION SCREEN_HORIZONTAL
 
+#define ICON_SIZE 100
+
 // https://github.com/adafruit/Adafruit_ILI9341/blob/master/Adafruit_ILI9341.h
 // https://github.com/adafruit/Adafruit-GFX-Library/blob/master/Adafruit_GFX.cpp
 
@@ -93,40 +95,40 @@ void printError(char* text) {
 void drawIcon(int x, int y, char* icon) {
   if (strcmp(icon, "01d") == 0) {
     // 01d - Sun
-    tft.drawRGBBitmap(x, y, icon_01d, 100, 100);
+    tft.drawRGBBitmap(x, y, icon_01d, ICON_SIZE, ICON_SIZE);
   } else if (strcmp(icon, "01n") == 0) {
     // 01n - Sun - night
-    tft.drawRGBBitmap(x, y, icon_01n, 100, 100);
+    tft.drawRGBBitmap(x, y, icon_01n, ICON_SIZE, ICON_SIZE);
   } else if (strcmp(icon, "02d") == 0) {
     // 02d - Cloud, sun
-    tft.drawRGBBitmap(x, y, icon_02d, 100, 100);
+    tft.drawRGBBitmap(x, y, icon_02d, ICON_SIZE, ICON_SIZE);
   } else if (strcmp(icon, "02n") == 0) {
     // 02d - Cloud, sun - night
-    tft.drawRGBBitmap(x, y, icon_02n, 100, 100);
+    tft.drawRGBBitmap(x, y, icon_02n, ICON_SIZE, ICON_SIZE);
   } else if (strcmp(icon, "03d") == 0 || strcmp(icon, "03n") == 0) {
     // 03d - Cloud
-    tft.drawRGBBitmap(x, y, icon_03d, 100, 100);
+    tft.drawRGBBitmap(x, y, icon_03d, ICON_SIZE, ICON_SIZE);
   } else if (strcmp(icon, "04d") == 0 || strcmp(icon, "04n") == 0) {
     // 04d - Cloud, second cloud
-    tft.drawRGBBitmap(x, y, icon_04d, 100, 100);
+    tft.drawRGBBitmap(x, y, icon_04d, ICON_SIZE, ICON_SIZE);
   } else if (strcmp(icon, "09d") == 0 || strcmp(icon, "09n") == 0) {
     // 09d - Clouds, rain
-    tft.drawRGBBitmap(x, y, icon_09d, 100, 100);
+    tft.drawRGBBitmap(x, y, icon_09d, ICON_SIZE, ICON_SIZE);
   } else if (strcmp(icon, "10d") == 0) {
     // 10d - Clouds, sun, rain
-    tft.drawRGBBitmap(x, y, icon_10d, 100, 100);
+    tft.drawRGBBitmap(x, y, icon_10d, ICON_SIZE, ICON_SIZE);
   } else if (strcmp(icon, "10n") == 0) {
     // 10d - Clouds, sun, rain - night
-    tft.drawRGBBitmap(x, y, icon_10n, 100, 100);
+    tft.drawRGBBitmap(x, y, icon_10n, ICON_SIZE, ICON_SIZE);
   } else if (strcmp(icon, "11d") == 0 || strcmp(icon, "11n") == 0) {
     // 11d - Clouds, lightning
-    tft.drawRGBBitmap(x, y, icon_11d, 100, 100);
+    tft.drawRGBBitmap(x, y, icon_11d, ICON_SIZE, ICON_SIZE);
   } else if (strcmp(icon, "13d") == 0 || strcmp(icon, "13n") == 0) {
     // 13d - Snow
-    tft.drawRGBBitmap(x, y, icon_13d, 100, 100);
+    tft.drawRGBBitmap(x, y, icon_13d, ICON_SIZE, ICON_SIZE);
   } else if (strcmp(icon, "50d") == 0 ||strcmp(icon, "50n") == 0) {
     // 50d - Fog
-    tft.drawRGBBitmap(x, y, icon_50d, 100, 100);
+    tft.drawRGBBitmap(x, y, icon_50d, ICON_SIZE, ICON_SIZE);
   }
 }
 
