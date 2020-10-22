@@ -25,9 +25,13 @@ struct Location {
 };
 
 void fillWeatherFromJson(Weather* weather) {
+  int tempH = (int) round(json["current"]["temp"]);
+  int feelsLikeH = (int) round(json["current"]["feels_like"]);
+  boolean tempHLower = tempH < feelsLikeH;
+
   sprintf(weather->iconH, "%s", (const char*) json["current"]["weather"][0]["icon"]);
-  sprintf(weather->tempH, "%i C", (int) round(json["current"]["temp"]));
-  sprintf(weather->feelsLikeH, "%i C", (int) round(json["current"]["feels_like"]));
+  sprintf(weather->tempH, "%i C", tempHLower ? tempH : feelsLikeH);
+  sprintf(weather->feelsLikeH, "%i C", tempHLower ? feelsLikeH : tempH);
   sprintf(weather->humidityH, "%i %%", (int) json["current"]["humidity"]);
   
   sprintf(weather->iconD, "%s", (const char*) json["daily"][0]["weather"][0]["icon"]);
