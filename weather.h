@@ -30,19 +30,19 @@ void fillWeatherFromJson(Weather* weather) {
   boolean tempHLower = tempH < feelsLikeH;
 
   sprintf(weather->iconH, "%s", (const char*) json["current"]["weather"][0]["icon"]);
-  sprintf(weather->tempH, "%i C", tempHLower ? tempH : feelsLikeH);
-  sprintf(weather->feelsLikeH, "%i C", tempHLower ? feelsLikeH : tempH);
-  sprintf(weather->humidityH, "%i %%", (int) json["current"]["humidity"]);
+  sprintf(weather->tempH, "%2i C", tempHLower ? tempH : feelsLikeH);
+  sprintf(weather->feelsLikeH, "%2i C", tempHLower ? feelsLikeH : tempH);
+  sprintf(weather->humidityH, "%3i %%", (int) json["current"]["humidity"]);
   
   sprintf(weather->iconD, "%s", (const char*) json["daily"][0]["weather"][0]["icon"]);
-  sprintf(weather->tempMinD, "%i C", (int) round(json["daily"][0]["temp"]["min"]));
-  sprintf(weather->tempMaxD, "%i C", (int) round(json["daily"][0]["temp"]["max"]));
-  sprintf(weather->humidityD, "%i %%", (int) json["daily"][0]["humidity"]);
+  sprintf(weather->tempMinD, "%2i C", (int) round(json["daily"][0]["temp"]["min"]));
+  sprintf(weather->tempMaxD, "%2i C", (int) round(json["daily"][0]["temp"]["max"]));
+  sprintf(weather->humidityD, "%3i %%", (int) json["daily"][0]["humidity"]);
 
   sprintf(weather->iconD1, "%s", (const char*) json["daily"][1]["weather"][0]["icon"]);
-  sprintf(weather->tempMinD1, "%i C", (int) round(json["daily"][1]["temp"]["min"]));
-  sprintf(weather->tempMaxD1, "%i C", (int) round(json["daily"][1]["temp"]["max"]));
-  sprintf(weather->humidityD1, "%i %%", (int) json["daily"][1]["humidity"]);
+  sprintf(weather->tempMinD1, "%2i C", (int) round(json["daily"][1]["temp"]["min"]));
+  sprintf(weather->tempMaxD1, "%2i C", (int) round(json["daily"][1]["temp"]["max"]));
+  sprintf(weather->humidityD1, "%3i %%", (int) json["daily"][1]["humidity"]);
 
   int timezone_offset = (int) json["timezone_offset"];
   int dt = (int) json["current"]["dt"];
