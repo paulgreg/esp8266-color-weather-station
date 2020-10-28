@@ -12,7 +12,7 @@ void setup() {
   Serial.begin(115200);
   Serial.println("\n\nLed Screen Weather Station"); 
   setupScreen();
-  printMsg("Weather\nStation"); 
+  printMsg("Weather Station"); 
   delay(500);
 }
 

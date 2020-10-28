@@ -134,10 +134,10 @@ void drawIcon(int x, int y, char* icon) {
 
 void displayDayMinMax(int x, char* title, char* icon, char* temp1, char* temp2, char* humidity) {
   drawIcon(     x +  0,  50, icon);
-  drawBigText(  x + 20,  65, ILI9341_BLACK, title);
-  drawText(     x + 30, 155, ILI9341_BLACK, temp1);
-  drawText(     x + 30, 180, ILI9341_RED, temp2);
-  drawSmallText(x + 35, 200, ILI9341_BLACK, humidity);
+  drawBigText(  x + 25,  65, ILI9341_BLACK, title);
+  drawText(     x + 25, 160, ILI9341_BLACK, temp1);
+  drawText(     x + 25, 185, ILI9341_RED, temp2);
+  drawSmallText(x + 30, 205, ILI9341_BLACK, humidity);
 }
 
 void displayWeather(char* town, Weather* weather) {
