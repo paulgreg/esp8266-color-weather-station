@@ -6,7 +6,11 @@
 #define TFT_DC    2 // D4            // TFT DC  pin is connected to NodeMCU pin D4 / GPIO 2
 Adafruit_ILI9341  tft = Adafruit_ILI9341(TFT_CS, TFT_DC, TFT_RST);
 
-#define BACKGND 0x7618 // https://ee-programming-notepad.blogspot.com/2016/10/16-bit-color-generator-picker.html
+// https://ee-programming-notepad.blogspot.com/2016/10/16-bit-color-generator-picker.html
+#define BACKGND     0x7618 
+#define COLOR_TEXT  ILI9341_BLACK
+#define COLOR_TEMP1 ILI9341_BLACK
+#define COLOR_TEMP2 ILI9341_RED
 
 #include "icons/01d.h"
 #include "icons/01n.h"
@@ -84,7 +88,7 @@ void drawText(int x, int y, int color, char* text) {
 
 void printMsg(char* text) {
   fillScreen(BACKGND);
-  drawText(5, 50, ILI9341_BLACK, text);
+  drawText(5, 50, COLOR_TEXT, text);
 }
 
 void printError(char* text) {
@@ -134,17 +138,17 @@ void drawIcon(int x, int y, char* icon) {
 
 void displayDayMinMax(int x, char* title, char* icon, char* temp1, char* temp2, char* humidity) {
   drawIcon(     x +  0,  50, icon);
-  drawBigText(  x + 25,  65, ILI9341_BLACK, title);
-  drawText(     x + 25, 160, ILI9341_BLACK, temp1);
-  drawText(     x + 25, 185, ILI9341_RED, temp2);
-  drawSmallText(x + 30, 205, ILI9341_BLACK, humidity);
+  drawBigText(  x + 25,  65, COLOR_TEXT, title);
+  drawText(     x + 25, 160, COLOR_TEMP1, temp1);
+  drawText(     x + 25, 185, COLOR_TEMP2, temp2);
+  drawSmallText(x + 30, 205, COLOR_TEXT, humidity);
 }
 
 void displayWeather(char* town, Weather* weather) {
   fillScreen(BACKGND);
-  drawBigText(20, 30, ILI9341_BLACK, town);
+  drawBigText(20, 30, COLOR_TEXT, town);
   displayDayMinMax(0, " H", weather->iconH, weather->tempH, weather->feelsLikeH, weather->humidityH);
   displayDayMinMax(100, " J", weather->iconD, weather->tempMinD, weather->tempMaxD, weather->humidityD);
   displayDayMinMax(200, "J+1", weather->iconD1, weather->tempMinD1, weather->tempMaxD1, weather->humidityD1);
-  drawSmallText(60, 230, ILI9341_BLACK, weather->updated);
+  drawSmallText(60, 230, COLOR_TEXT, weather->updated);
 }
