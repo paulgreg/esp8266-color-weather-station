@@ -25,6 +25,8 @@ void loop(void) {
     printMsg("Connecting to wifi...");
     if (!connectToWifi()) {
       printError("Can't connect to wifi !");
+      delay(60 * 1000);
+      return;
     } else {
       boolean jsonParsed = getJSON(locations[i].url);
       if (!jsonParsed) {
