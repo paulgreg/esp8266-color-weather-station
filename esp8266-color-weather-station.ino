@@ -12,7 +12,7 @@ void setup() {
   Serial.begin(115200);
   Serial.println("\n\nLed Screen Weather Station"); 
   setupScreen();
-  printMsg("Weather Station"); 
+  printMsg("Station Meteo"); 
   delay(500);
 }
 
@@ -22,15 +22,15 @@ void loop(void) {
   uint16_t i = idx % NB_LOCATIONS;
   Serial.printf("\nLocation: %s - count: %i\n", locations[i].town, locations[i].count);
   if ((locations[i].count % 50) == 0) {
-    printMsg("Connecting to wifi...");
+    printMsg("Connexion au wifi...");
     if (!connectToWifi()) {
-      printError("Can't connect to wifi !");
+      printError("Erreur wifi !");
       delay(60 * 1000);
       return;
     } else {
       boolean jsonParsed = getJSON(locations[i].url);
       if (!jsonParsed) {
-        printError("Error getting JSON");
+        printError("Erreur JSON");
       } else {
         fillWeatherFromJson(&locations[i].weather);
       }
@@ -39,5 +39,5 @@ void loop(void) {
   displayWeather(locations[i].town, &locations[i].weather);
   locations[i].count++;
   idx++;
-  delay(5 * 1000);
+  delay(8 * 1000);
 }
