@@ -58,7 +58,8 @@ void fillScreen(int color) {
 }
 
 void setupScreen() {
-  tft.begin();;
+  // tft.begin();
+  tft.begin(3000000);
   screenDiagnostics();
   tft.setRotation(SCREEN_ORIENTATION);
   fillScreen(ILI9341_WHITE);
